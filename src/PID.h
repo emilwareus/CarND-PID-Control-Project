@@ -10,13 +10,17 @@ public:
   double i_error;
   double d_error;
 
+
+  double old_error;
+  double I;
   /*
   * Coefficients
   */ 
   double Kp;
   double Ki;
   double Kd;
-
+  
+  double last_t;
   /*
   * Constructor
   */
