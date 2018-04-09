@@ -48,7 +48,7 @@ void PID::UpdateError(double cte) {
 
 double PID::TotalError() {
 
-    double u = -Kp*p_error - Ki*i_error - Kd*d_error;
+    double u = -Kp*p_error - Ki*i_error + Kd*d_error;
 
     //Saturation 
     if(u > 1.0){
