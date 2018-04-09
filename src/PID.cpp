@@ -36,7 +36,7 @@ void PID::Init(double Kp, double Ki, double Kd) {
 void PID::UpdateError(double cte) {
 
     double cur_time = getMilliCount();
-    double delta_t = last_t - cur_time;
+    double delta_t = cur_time - last_t;
     last_t = cur_time;
     
     d_error = (cte - p_error) / delta_t;
