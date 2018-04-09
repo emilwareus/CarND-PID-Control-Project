@@ -26,8 +26,6 @@ void PID::Init(double Kp, double Ki, double Kd) {
     this->p_error = 0;
     this->i_error = 0;
     this->d_error = 0;
-    this->I = 0;
-    this->old_error = 0;
     this->last_t = getMilliCount();
 
     cout<< "Initialized!" <<endl;
@@ -36,19 +34,29 @@ void PID::Init(double Kp, double Ki, double Kd) {
 }
 
 void PID::UpdateError(double cte) {
+
     double cur_time = getMilliCount();
     double delta_t = this->last_t - cur_time
     this-> last_t = cur_time;
-
-    I = cte*delta_t + I; 
-    double D = (cte - old_error)/delta_t;
-
-
+    
+    d_error = (cte - p_error) / delta_t;
+    p_error = cte;
+    i_error = cte*delta_t + I; 
+    
 
 }
 
 double PID::TotalError() {
 
+    double u = this->Kp*p_error + this->Ki*i_error + this-Kd*d_error
+
+    //Saturation 
+    if(u > 1.0){
+        u = 1.0;
+    }else if(u < -1.0 ){
+        u = -1.0;
+    }
+    return u;
 
 }
 

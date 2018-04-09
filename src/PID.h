@@ -11,8 +11,6 @@ public:
   double d_error;
 
 
-  double old_error;
-  double I;
   /*
   * Coefficients
   */ 
