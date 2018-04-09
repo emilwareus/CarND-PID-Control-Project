@@ -1,7 +1,7 @@
 #include "PID.h"
 
 #include <iostream>
-#include cstdlib
+#include <cstdlib>
 #include <sys/timeb.h>
 
 
@@ -20,8 +20,8 @@ PID::~PID() {}
 
 void PID::Init(double Kp, double Ki, double Kd) {
     this->Kp = Kp;
-    this->Ki = Hi;
-    this->Kd = Hd;
+    this->Ki = Ki;
+    this->Kd = Kd;
 
     this->p_error = 0;
     this->i_error = 0;
@@ -36,19 +36,19 @@ void PID::Init(double Kp, double Ki, double Kd) {
 void PID::UpdateError(double cte) {
 
     double cur_time = getMilliCount();
-    double delta_t = this->last_t - cur_time
-    this-> last_t = cur_time;
+    double delta_t = last_t - cur_time;
+    last_t = cur_time;
     
     d_error = (cte - p_error) / delta_t;
     p_error = cte;
-    i_error = cte*delta_t + I; 
+    i_error = cte*delta_t + i_error; 
     
 
 }
 
 double PID::TotalError() {
 
-    double u = this->Kp*p_error + this->Ki*i_error + this-Kd*d_error
+    double u = Kp*p_error + Ki*i_error + Kd*d_error;
 
     //Saturation 
     if(u > 1.0){
