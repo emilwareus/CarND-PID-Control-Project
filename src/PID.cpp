@@ -39,16 +39,16 @@ void PID::UpdateError(double cte) {
     double delta_t = cur_time - last_t;
     last_t = cur_time;
     
-    d_error = (cte - p_error) / delta_t;
+    d_error = cte - p_error; //) / delta_t;
     p_error = cte;
-    i_error = cte*delta_t + i_error; 
+    i_error = cte + i_error; //
     
 
 }
 
 double PID::TotalError() {
 
-    double u = -Kp*p_error - Ki*i_error + Kd*d_error;
+    double u = -Kp*p_error - Ki*i_error - Kd*d_error;
 
     //Saturation 
     if(u > 1.0){
